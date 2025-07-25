@@ -21,41 +21,46 @@ public class controller : MonoBehaviour
         bool isdancing = animator.GetBool("isdancing");
         if (Input.GetKeyDown(KeyCode.Space)) // Check if space key is pressed down
         {
-            if(!isdancing) // Start  dancing only if not already dancing
+            if (!isdancing) // Start  dancing only if not already dancing
             {
                 animator.SetBool("isdancing", true);
                 //Effect.SetActive(true);
             }
         }
-        
-        if (Input.anyKeyDown) // Check if any key is pressed down
+
+        if (isdancing && Input.GetKey("c"))
         {
-            if(isdancing) // Stop dancing only if currently dancing
+            if (Effect2.activeSelf)
             {
-            animator.SetBool("isdancing", false);
-            if (Effect2.activeSelf){
-                 Effect2.SetActive(false);
+                Effect2.SetActive(false);
             }
-            if (Effect1.activeSelf){
-                 Effect1.SetActive(false);
-            }
-            }     
+            Effect1.SetActive(true);
         }
-        if (isdancing && Input.GetKey("c")){
-            if (Effect2.activeSelf){
-                 Effect2.SetActive(false);
-            }
-              Effect1.SetActive(true);
-        }
-        if (isdancing && Input.GetKey("b")){
+        if (isdancing && Input.GetKey("b"))
+        {
             Debug.Log(Effect1);
-            if (Effect1.activeSelf){
+            if (Effect1.activeSelf)
+            {
                 Debug.Log("effect 1 turned off");
                 Effect1.SetActive(false);
             }
-              Effect2.SetActive(true);
+            Effect2.SetActive(true);
+        }
+        else if (Input.anyKeyDown) // Check if any key is pressed down
+        {
+            if(isdancing) // Stop dancing only if currently dancing
+            {
+                animator.SetBool("isdancing", false);
+                if (Effect2.activeSelf){
+                    Effect2.SetActive(false);
+                }
+                if (Effect1.activeSelf){
+                    Effect1.SetActive(false);
+                }
+            }     
         }
 
     
     
-}}
+}
+}
